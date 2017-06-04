@@ -3,21 +3,21 @@
         <table class="table table-striped table-condensed table-bordered">
             <tbody>
             <tr>
-                <th v-for="attr in attrs">{{attr}}</th>
+                <th v-for="attr in Object.keys(attrs)">{{attr}}</th>
                 <th>
                     <button class="btn btn-success" @click="create()">创建</button>
                     <button class="btn btn-primary" @click="refresh()">刷新</button>
                 </th>
             </tr>
             <tr v-for="data in datas">
-                <td v-for="attr in attrs">{{data[attr]}}</td>
+                <td v-for="attr in Object.keys(attrs)">{{data[attr]}}</td>
                 <td>
                     <button class="btn btn-success" @click="edit(data)">编辑</button>
                     <button class="btn btn-danger" @click="delConfirm(data)">删除</button>
                 </td>
             </tr>
             <tr v-show="status!=0">
-                <td v-for="attr in attrs"><input v-model="editData[attr]"></input></td>
+                <td v-for="attr in Object.keys(attrs)"><input v-model="editData[attr]" :disabled="attrs[attr] != 0 && !(status==2 && attrs[attr] == 3)"></input></td>
                 <td>
                     <button class="btn btn-success" @click="submit(editData)">提交</button>
                     <button class="btn btn-warning" @click="cancel()">取消</button>
@@ -26,19 +26,18 @@
             </tbody>
         </table>
 
-       <!-- <b-alert variant="success" dismissible :show="msgSucc" @dismiss-count-down="msgSucc-=1">
-            <h4>信息</h4>
+        <alert :show.sync="msgSucc" placement="top-right" :duration="3000" type="success" width="400px">
+            <span class="glyphicon glyphicon-ok-sign" ></span>
+            <strong>信息</strong>
             <p>操作成功</p>
-        </b-alert>
+        </alert>
 
-        <b-alert variant="danger" dismissible :show="msgFail" @dismiss-count-down="msgFail-=1"> 
-            <h4>信息</h4>
+        <alert :show.sync="msgFail" placement="top-right" :duration="3000" type="danger" width="400px">
+            <span class="glyphicon glyphicon-remove-sign"></span>
+            <strong>信息</strong>
             <p>操作失败</p>
-        </b-alert>
+        </alert>
 
-        <b-modal id="modal1" title="确认删除" @ok="del()" v-model="showConfirm">
-            <p>你确定要删除吗?</p>
-        </b-modal> -->
 
         <modal :show.sync="showConfirm" effect="zoom" :backdrop="false" >
             <div slot="modal-header" class="modal-header"><h4>确认删除</h4></div>
@@ -47,7 +46,7 @@
             </div>
             <div slot="modal-footer" class="modal-footer">
                 <button class="btn btn-default" @click="showConfirm=false">取消</button>
-                <button class="btn btn-success" @click="del()">确认</button>
+                <button class="btn btn-danger" @click="del()">确认删除</button>
             </div>
         </modal>
 
@@ -60,11 +59,11 @@
     //Vue.use(BootStrapVue);
 
     //import {bAlert, bModal} from 'bootstrap-vue/lib/components'
-    import {modal} from "vue-strap"
+    import {modal, alert} from "vue-strap"
 
     export default {
         name:"tb",
-        components:{/*bAlert, bModal,*/ modal},
+        components:{/*bAlert, bModal,*/ modal, alert},
         props:{attrs:{required:true}, tableURL:{required: true}},
         data(){return {
             status:0,
@@ -72,21 +71,34 @@
             editData:{},
             ajaxStatus: 0,
             delBuf: -1,
-            msgSucc: 0,
-            msgFail: 0,
+            msgSucc: false,
+            msgFail: false,
             showConfirm: false
         };},
         methods:{
             edit(data){
-                for (var attr in data){
+                for (var attr in this.attrs){
                     this.editData[attr] = data[attr];
+                    console.log(attr+":"+data[attr]);
                 }
+                console.log(JSON.stringify(this.editData));
                 this.status = 1;
             },
-            create(){this.editData = {}; this.status = 2;},
+            create(){
+                this.editData = {}; 
+                for(var attr in this.attrs){
+                    if(this.attrs[attr] == 2)
+                        this.editData[attr] = "auto";
+                }
+                this.status = 2;
+            },
             cancel(){this.status = 0;},
             delConfirm(data){
-                this.delBuf = {"id": data["id"]};
+                this.delBuf = {};
+                for(var attr in this.attrs){
+                    if(this.attrs[attr] >= 2)
+                        this.delBuf[attr] = data[attr];
+                }
                 this.showConfirm = true; 
             },
             del(){
@@ -97,7 +109,13 @@
                 if(this.status == 1){ // edit
                     this.ajax("update", data);
                 }else{ // create
-                    this.ajax("insert", data);
+                    var postBody = {};
+                    for(var attr in this.attrs){
+                        if(this.attrs[attr] != 2){
+                            postBody[attr] = data[attr];
+                        }
+                    }
+                    this.ajax("insert", postBody);
                 }
                 if(this.ajaxStatus == 1){
                     this.ajaxStatus = 0;
@@ -115,15 +133,18 @@
                      if(data == 1){
                          self.ajaxStatus = 1;
                          self.status = 0;
-                         self.msgSucc = 10;
+                         self.msgSucc = true;
+                         setTimeout(()=>{self.msgSucc=false}, 2000);
                          self.refresh();
                      }else{
                          self.ajaxStatus = -1;
-                         self.msgFail = 10;
+                         self.msgFail = true;
+                         setTimeout(()=>{self.msgFail=false}, 2000);
                      }
                  }).fail(function(){
                      self.ajaxStatus = -1;
-                     self.msgFail = 10;
+                     self.msgFail = true;
+                     setTimeout(()=>{self.msgFail=false}, 2000);
                  })
              }
         },
@@ -134,6 +155,6 @@
 </script>
 
 <style>
-    table{width:80% !important;}
+    table{width:80% !important; margin-left:10%;}
     th, td, input{width:150px !important;}
 </style>
