@@ -26,16 +26,14 @@
             </tbody>
         </table>
 
-        <alert :show.sync="msgSucc" placement="top-right" :duration="3000" type="success" width="400px">
+        <alert :show.sync="msgSucc" placement="top-right" :duration="3000" type="success" width="300px">
             <span class="glyphicon glyphicon-ok-sign" ></span>
-            <strong>信息</strong>
-            <p>操作成功</p>
+            <strong>操作成功</strong>
         </alert>
 
-        <alert :show.sync="msgFail" placement="top-right" :duration="3000" type="danger" width="400px">
+        <alert :show.sync="msgFail" placement="top-right" :duration="3000" type="danger" width="300px">
             <span class="glyphicon glyphicon-remove-sign"></span>
-            <strong>信息</strong>
-            <p>操作失败</p>
+            <strong>操作失败</strong>
         </alert>
 
 
@@ -156,5 +154,5 @@
 
 <style>
     table{width:80% !important; margin-left:10%;}
-    th, td, input{width:150px !important;}
+    th, td, td>input{text-align: center; width:150px !important;}
 </style>

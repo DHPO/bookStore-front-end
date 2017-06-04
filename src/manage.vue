@@ -20,7 +20,7 @@
         data(){return {
             tables:{
                 Book:{id:2, name:0, price:0},
-                User:{id:2, name:0, password:0, email:0},
+                User:{id:2, name:0, password:0, email:0, role: 0},
                 Order:{orderid:2, userid:0},
                 OrderItem:{orderid:3, bookid:3, price:0, amount:0}
             },
@@ -35,6 +35,5 @@
 
 <style>
     .btn-group, table, th{text-align: center!important; margin-top: 25px;}
-    input{text-align: center!important;}
     .btn-group{margin-left: 35%;}
 </style>
