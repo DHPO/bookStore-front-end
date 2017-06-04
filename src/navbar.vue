@@ -3,14 +3,14 @@
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
     <div class="navbar-header">
-        <a class="navbar-brand" href="#">在线书店</a>
+        <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-book"></span> 在线书店</a>
     </div>
     <div>
         <ul class="nav navbar-nav" style="width:90%;">
             <li :class="{active:$route.path=='/index'}"><a href="#">首页</a></li>
-            <li :class="{active:$route.path=='/book'}"><a href="#">书籍</a></li>
-            <li :class="{active:$route.path=='/cart'}"><a href="#">购物车</a></li>
-            <li v-if="$route.name=='modal'" :class="{active:$route.name=='modal'}"><a href="#">搜索</a></li>
+            <li :class="{active:$route.path=='/book'}"><a href="#/book">书籍</a></li>
+            <li v-if="role >= 1" :class="{active:$route.path=='/cart'}"><a href="#">购物车</a></li>
+            <li v-if="$route.name=='search'" :class="{active:$route.name=='search'}"><a>搜索</a></li>
             <li v-if="role >= 2" :class="{active:$route.path=='/manage'}"><a href="#/manage">管理</a></li>
 
             <login @login="updateRole()" @logout="role = 0"></login>
@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <input v-model="searchContent" type="text" class="form-control" placeholder="Search">
                 </div>
-                <button type="submit" class="btn btn-default">提交</button>
+                <button type="submit" class="btn btn-default" @click="$router.push({name:'search', params:{name: searchContent}})">搜索</button>
             </form>
         </ul>
     </div>
