@@ -9,6 +9,7 @@ import modalTest from "./modalTest.vue"
 import navbar from "./navbar.vue"
 import bookview from "./bookview.vue"
 import searchResult from "./searchResult.vue"
+import bookDetail from "./bookDetail.vue"
 
 const routes = [
     {path:'/index',component:App},
@@ -17,6 +18,7 @@ const routes = [
     {path:"/", redirect:"/index"},
     {path:"/manage", component: manage},
     {path:"/book", component: bookview},
+    {path:"/book/:id", name:"book", component: bookDetail},
     {path:"/search/:name", name:"search", component: searchResult}
 ]
 

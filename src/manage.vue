@@ -19,7 +19,7 @@
         name:"manage",
         data(){return {
             tables:{
-                Book:{id:2, name:0, price:0},
+                Book:{id:2, name:0, price:0, img:0, author:0, publisher:0, comment:0},
                 User:{id:2, name:0, password:0, email:0, role: 0},
                 Order:{orderid:2, userid:0, status: 0},
                 OrderItem:{orderid:3, bookid:3, price:0, amount:0}

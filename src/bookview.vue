@@ -15,7 +15,7 @@
         }},
         created(){
             var self = this;
-            $.get("/getBook", (data)=>{
+            $.get("/getBookSimple", (data)=>{
                 self.books = data;
             }).fail(()=>{
                 self.$emit("fail");
