@@ -10,6 +10,7 @@ import navbar from "./navbar.vue"
 import bookview from "./bookview.vue"
 import searchResult from "./searchResult.vue"
 import bookDetail from "./bookDetail.vue"
+import cart from "./cart.vue"
 
 const routes = [
     {path:'/index',component:App},
@@ -19,7 +20,8 @@ const routes = [
     {path:"/manage", component: manage},
     {path:"/book", component: bookview},
     {path:"/book/:id", name:"book", component: bookDetail},
-    {path:"/search/:name", name:"search", component: searchResult}
+    {path:"/search/:name", name:"search", component: searchResult},
+    {path:"/cart", component:cart}
 ]
 
 const router = new VueRouter({

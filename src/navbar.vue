@@ -9,7 +9,7 @@
         <ul class="nav navbar-nav" style="width:90%;">
             <li :class="{active:$route.path=='/index'}"><a href="#">首页</a></li>
             <li :class="{active:$route.path=='/book'}"><a href="#/book">书籍</a></li>
-            <li v-if="role >= 1" :class="{active:$route.path=='/cart'}"><a href="#">购物车</a></li>
+            <li v-if="role >= 1" :class="{active:$route.path=='/cart'}"><a href="#/cart">购物车</a></li>
             <li v-if="$route.name=='search'" :class="{active:$route.name=='search'}"><a>搜索</a></li>
             <li v-if="role >= 2" :class="{active:$route.path=='/manage'}"><a href="#/manage">管理</a></li>
 
