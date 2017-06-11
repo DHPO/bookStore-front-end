@@ -2,21 +2,17 @@ import Vue from "vue";
 import VueRouter from "vue-router"
 Vue.use(VueRouter)
 
-import tb from "./table.vue"
 import App from "./app.vue"
-import manage from "./manage.vue"
-import modalTest from "./modalTest.vue"
+import manage from "./manage/manage.vue"
 import navbar from "./navbar.vue"
-import bookview from "./bookview.vue"
-import searchResult from "./searchResult.vue"
-import bookDetail from "./bookDetail.vue"
-import cart from "./cart.vue"
-import orders from "./orders.vue"
+import bookview from "./book/bookview.vue"
+import searchResult from "./book/searchResult.vue"
+import bookDetail from "./book/bookDetail.vue"
+import cart from "./cart&&order/cart.vue"
+import orders from "./cart&&order/orders.vue"
 
 const routes = [
     {path:'/index',component:App},
-    {path:"/modal/:id", name:"modal", component: modalTest},
-    {path:"/table", component: tb},
     {path:"/", redirect:"/index"},
     {path:"/manage", component: manage},
     {path:"/book", component: bookview},
