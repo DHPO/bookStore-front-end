@@ -14,7 +14,7 @@
                 <td>{{book.price | currency('￥')}}</td>
                 <td>
                     <button class="btn" @click="book.num -= 1">-</button>
-                    <input v-model="book.num" class="input" />
+                    <input v-model="book.num" class="input num" />
                     <button class="btn" @click="book.num += 1">+</button>
                 </td>
                 <td>{{(book.price*book.num) | currency('￥')}}</td>
@@ -136,5 +136,5 @@
 </script>
 
 <style>
-
+    .num{width:100px;}
 </style>

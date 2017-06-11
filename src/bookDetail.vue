@@ -15,8 +15,8 @@
                 <button class="btn btn-default" :disabled="amount<=0" @click="minus()">-</button>
                 <input id="amount" class="input" v-model="amount"/>
                 <button class="btn btn-default" @click="plus()">+</button>
-                <button class="btn btn-warning" v-show="amount!=amountOrigin" @click="cancel()">取消</button>
                 <button class="btn btn-success" :disabled="amount==amountOrigin" @click="submit()">确定</button>
+                <button class="btn btn-warning" v-show="amount!=amountOrigin" @click="cancel()">取消</button>
             </div>
         </div>
     </div>
