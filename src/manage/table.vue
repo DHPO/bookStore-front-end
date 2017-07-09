@@ -3,21 +3,21 @@
         <table class="table table-striped table-condensed table-bordered">
             <tbody>
             <tr>
-                <th v-for="attr in Object.keys(attrs)">{{attr}}</th>
+                <th v-for="attr in Object.keys(attrs)" :key="attr">{{attr}}</th>
                 <th>
                     <button class="btn btn-success" @click="create()">创建</button>
                     <button class="btn btn-primary" @click="refresh()">刷新</button>
                 </th>
             </tr>
-            <tr v-for="data in datas">
-                <td v-for="attr in Object.keys(attrs)">{{data[attr]}}</td>
+            <tr v-for="data in datas" :key="data">
+                <td v-for="attr in Object.keys(attrs)" :key="attr">{{data[attr]}}</td>
                 <td>
                     <button class="btn btn-success" @click="edit(data)">编辑</button>
                     <button class="btn btn-danger" @click="delConfirm(data)">删除</button>
                 </td>
             </tr>
             <tr v-show="status!=0">
-                <td v-for="attr in Object.keys(attrs)"><input v-model="editData[attr]" :disabled="attrs[attr] != 0 && !(status==2 && attrs[attr] == 3)"></input></td>
+                <td v-for="attr in Object.keys(attrs)" :key="attr"><input v-model="editData[attr]" :disabled="attrs[attr] != 0 && !(status==2 && attrs[attr] == 3)"></input></td>
                 <td>
                     <button class="btn btn-success" @click="submit(editData)">提交</button>
                     <button class="btn btn-warning" @click="cancel()">取消</button>

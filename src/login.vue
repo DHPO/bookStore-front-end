@@ -5,7 +5,7 @@
         <li><a @click="loginModal()"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li> 
     </ul> 
     <ul v-else class="nav navbar-nav navbar-right"> 
-        <li><a><span class="glyphicon glyphicon-user"></span> {{user["username"]}}</a></li> 
+        <li><a href="#/profile"><span class="glyphicon glyphicon-user"></span> {{user["username"]}}</a></li> 
         <li><a @click="logout()"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li> 
     </ul> 
 
