@@ -153,6 +153,5 @@
 </script>
 
 <style>
-    table{width:80% !important; margin-left:10%;}
     th, td, td>input{text-align: center; width:150px !important;}
 </style>

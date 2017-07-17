@@ -2,7 +2,7 @@
 <div>
     <div id="wrapper">
         <div id="left">
-            <img :src="'/img/'+book.img" id="cover"></img>
+            <img v-if="book.img!=undefined" :src="'/img/'+book.img" id="cover"></img>
         </div>
         <div id="right">
             <p id="name"><b>{{book.name}}</b></p>
